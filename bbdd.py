@@ -101,7 +101,7 @@ def creacion_bbdd_tablas():
                              
                     id_alumno INT,
                     id_curso INT,
-                    Colegio VARCHAR(100),             
+                    colegio VARCHAR(100),             
                                
                     FOREIGN KEY (id_alumno) REFERENCES alumnos(id_alumno)  -- Relacionado con alumnos
                     
@@ -127,7 +127,9 @@ def creacion_bbdd_tablas():
 # Crear tabla 'inscripciones' (relacionada con FK a  alumnos, cursos y tutores)
             mycursor.execute("""
                 CREATE TABLE IF NOT EXISTS inscripciones (
+                             
                     id_inscripcion INT PRIMARY KEY AUTO_INCREMENT,
+                             
                     id_alumno INT,
                     id_curso INT,
                     id_colegio INT,
@@ -149,8 +151,9 @@ def creacion_bbdd_tablas():
                     id_sesion INT PRIMARY KEY AUTO_INCREMENT,
                              
                     id_alumno INT,
-                    id_terapeuta INT,
                     id_curso INT,
+                    id_terapeuta INT,
+                    
                              
                     fecha_sesion DATETIME,
                              
