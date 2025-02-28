@@ -43,8 +43,7 @@ def creacion_bbdd_tablas():
                              
                     alumno_nombre VARCHAR(50) NOT NULL, 
                     alumno_apellidos VARCHAR(50) NOT NULL,
-                    alumno_fecha_nacimiento DATETIME,
-                    fecha_creacion DATETIME                     
+                    alumno_fecha_nacimiento DATETIME             
                 );
             """)
             print("Tabla 'alumnos' creada.")
