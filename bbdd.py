@@ -29,7 +29,7 @@ def creacion_bbdd_tablas():
                 mycursor.execute("USE bbdd_midi")
                 print("Base de datos seleccionada correctamente.")
             except mysql.connector.Error as err:
-                print("Error al seleccionar la base de datos.")
+                print("⚠️ Error al seleccionar la base de datos.")
                 print("Código de Error:", err.errno)
                 print("SQLSTATE:", err.sqlstate)
                 print("Mensaje:", err.msg)
@@ -93,17 +93,13 @@ def creacion_bbdd_tablas():
             """)
             print("Tabla 'terapeutas' creada.")
 # ------------------------------------------------------------------------------
-            # Crear tabla 'colegios' (relacionada con FK a alumnos)
+            # Crear tabla 'colegios'
             mycursor.execute("""
                 CREATE TABLE IF NOT EXISTS colegios (
                              
                     id_colegio INT PRIMARY KEY AUTO_INCREMENT,
-                             
-                    id_alumno INT,
-                    id_curso INT,
-                    colegio VARCHAR(100),             
-                               
-                    FOREIGN KEY (id_alumno) REFERENCES alumnos(id_alumno)  -- Relacionado con alumnos
+            
+                    nombre_colegio VARCHAR(100)      
                     
                 );
             """)
@@ -156,6 +152,8 @@ def creacion_bbdd_tablas():
                     
                              
                     fecha_sesion DATETIME,
+                    asistencia BOOLEAN,
+                    observaciones TEXT,
                              
                     FOREIGN KEY (id_alumno) REFERENCES alumnos(id_alumno),
                     FOREIGN KEY (id_terapeuta) REFERENCES terapeutas(id_terapeuta),
@@ -168,7 +166,7 @@ def creacion_bbdd_tablas():
             cnx.commit()
 # ------------------------------------------------------------------------------
     except mysql.connector.Error as err:
-        print("Se produjo un error al crear la tabla.")
+        print("⚠️ Se produjo un error al crear la tabla.")
         print("Código de Error:", err.errno)
         print("SQLSTATE:", err.sqlstate)
         print("Mensaje:", err.msg)
