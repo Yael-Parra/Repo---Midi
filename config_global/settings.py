@@ -36,7 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.api_rest_midi',
+    'app.alumnos',
+    'app.info_padres_tutores_legales',
+    'app.terapeutas',
+    'app.colegios',
+    'app.cursos',
+    'app.inscripciones',
     
 ]
 
@@ -72,14 +77,6 @@ WSGI_APPLICATION = 'config_global.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME':'config_global.db',
-#     }
-# }
 
 from dotenv import load_dotenv
 import os
@@ -110,8 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'    },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
