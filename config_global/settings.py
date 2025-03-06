@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'app.colegios',
     'app.cursos',
     'app.inscripciones',
+    'app.sesiones',
     
 ]
 
