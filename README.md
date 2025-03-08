@@ -112,6 +112,7 @@ uv export --format requirements-txt > requirements.txt
 ### ⚙ Set Up the Database
 Ensure you have **MySQL** installed and configured. Then, create a `.env` file with your database credentials.
 ```sh
+touche .env # you must be on the project's folder
 #.env file must contain this exact variables for the code to run properly.
 mysql_username = 'your user name'
 mysql_password = 'your password'
