@@ -46,6 +46,7 @@ An **Excel file** has been provided to the client for easy data management. A sc
    - Courses
    - Schools
    - Sessions
+
 ✅ API documentation created with **Postman**  
 ✅ Basic exception handling for error management  
 ✅ Frontend aligned with the company’s brand identity manual  
@@ -61,12 +62,12 @@ An **Excel file** has been provided to the client for easy data management. A sc
 ---
 
 ## 🔧 Possible Improvements
-✅ Enhance exception handling for better error feedback.
-✅ Implement an accounting module for managing expenses (awaiting client requirements).
-✅ Improve unit testing coverage for better reliability.
-✅ Optimize API performance for handling a larger dataset.
-✅ Deploy the API to the cloud for better scalability and availability.
-✅ Implement CSV data exports for easier client reporting.
+✅ Enhance exception handling for better error feedback.  
+✅ Implement an accounting module for managing expenses (awaiting client requirements).  
+✅ Improve unit testing coverage for better reliability.  
+✅ Optimize API performance for handling a larger dataset.  
+✅ Deploy the API to the cloud for better scalability and availability.  
+✅ Implement CSV data exports for easier client reporting.  
 
 ---
 
