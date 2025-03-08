@@ -168,7 +168,7 @@ If you liked this project feel free to follow us:
 
 - [Yael Parra](https://www.linkedin.com/in/yael-parra/) - Database Architect / Data Engineer / Backend Developer / Project Documenter
 - [Andreina Suescum](https://www.linkedin.com/in/andreina-suescum-a44860231) - Frontend Developer / Client Liaison
-- [Maxi Scarlato](https://www.linkedin.com/in/maximiliano-carlos-scarlato-830a94284/) - Backend Developer / Developer Advocate
+- [Maxi Scarlato](https://www.linkedin.com/in/maximiliano-carlos-scarlato-830a94284/) - Founding Developer /Backend Developer / Developer Advocate
 - [Jorge](https://github.com/michaeljohnson) - 
 
 
