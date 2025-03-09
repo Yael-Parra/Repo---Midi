@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% if object %}
+        <h1 class="my-4">Editar Alumno</h1>
+    {% else %}
+        <h1 class="my-4">Nuevo Alumno</h1>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.alumno_nombre.id_for_label }}">Nombre:</label>
+            {{ form.alumno_nombre }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.alumno_apellidos.id_for_label }}">Apellidos:</label>
+            {{ form.alumno_apellidos }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.alumno_fecha_nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
+            {{ form.alumno_fecha_nacimiento }}
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Guardar</button>
+        <a href="{% url 'alumno_list' %}" class="btn btn-secondary mt-3">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,56 +1,33 @@
-# app/alumnos/views.py
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .models import Alumno
+from .forms import AlumnoForm
 
-@login_required
-def home(request):
-    alumnos = Alumno.objects.all()
-    return render(request, "gestionAlumnos.html", {"alumnos": alumnos})
+class AlumnoListView(ListView):
+    model = Alumno
+    template_name = 'alumno_list.html'
+    context_object_name = 'alumnos'
 
-@login_required
-def registrarAlumno(request):
-    if request.method == 'POST':
-        nombre = request.POST['txtNombre']
-        apellidos = request.POST['txtApellidos']
-        fecha_nacimiento = request.POST['txtFechaNacimiento'] or None
-        
-        alumno = Alumno.objects.create(
-            alumno_nombre=nombre,
-            alumno_apellidos=apellidos,
-            alumno_fecha_nacimiento=fecha_nacimiento
-        )
-        messages.success(request, '¡Alumno registrado correctamente!')
-        return redirect('/alumnos/')  # Redirect to absolute URL
-    return redirect('/alumnos/')
+class AlumnoCreateView(CreateView):
+    model = Alumno
+    form_class = AlumnoForm
+    template_name = 'alumno_form.html'
+    success_url = reverse_lazy('alumno_list')
 
-@login_required
-def edicionAlumno(request, id_alumno):
-    alumno = Alumno.objects.get(id_alumno=id_alumno)
-    return render(request, "edicion_alumno.html", {"alumno": alumno})
+class AlumnoUpdateView(UpdateView):
+    model = Alumno
+    form_class = AlumnoForm
+    template_name = 'alumno_form.html'
+    success_url = reverse_lazy('alumno_list')
+    pk_url_kwarg = 'id_alumno'
 
-@login_required
-def editarAlumno(request):
-    if request.method == 'POST':
-        id_alumno = request.POST['txtID']
-        nombre = request.POST['txtNombre']
-        apellidos = request.POST['txtApellidos']
-        fecha_nacimiento = request.POST['txtFechaNacimiento'] or None
-        
-        alumno = Alumno.objects.get(id_alumno=id_alumno)
-        alumno.alumno_nombre = nombre
-        alumno.alumno_apellidos = apellidos
-        alumno.alumno_fecha_nacimiento = fecha_nacimiento
-        alumno.save()
-        
-        messages.success(request, '¡Alumno actualizado correctamente!')
-        return redirect('/alumnos/')  # Redirect to absolute URL
-    return redirect('/alumnos/')
+class AlumnoDeleteView(DeleteView):
+    model = Alumno
+    template_name = 'alumno_confirm_delete.html'
+    success_url = reverse_lazy('alumno_list')
+    pk_url_kwarg = 'id_alumno'
 
-@login_required
-def eliminarAlumno(request, id_alumno):
-    alumno = Alumno.objects.get(id_alumno=id_alumno)
-    alumno.delete()
-    messages.success(request, '¡Alumno eliminado correctamente!')
-    return redirect('/alumnos/')  # Redirect to absolute URL
+def alumno_detail(request, id_alumno):
+    alumno = get_object_or_404(Alumno, id_alumno=id_alumno)
+    return render(request, 'alumno_detail.html', {'alumno': alumno})
