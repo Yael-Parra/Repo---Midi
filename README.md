@@ -104,7 +104,7 @@ pip install uv
 # Create toml
 uv init
 # Adding dependencies
-uv add --active dotenv mysql-connector-python openpyxl pandas pymysql
+uv add --active django dotenv mysql-connector-python openpyxl pandas pymysql django-widget-tweaks
 # Installing requirements
 uv export --format requirements-txt > requirements.txt
 ```
