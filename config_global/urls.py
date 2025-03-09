@@ -32,8 +32,10 @@ urlpatterns = [
     path('sesiones/', include('app.sesiones.urls')),  # Incluye las URLs de la aplicación info_padres_tutores_legales
     path('terapeutas/', include('app.terapeutas.urls')),  # Incluye las URLs de la aplicación terapeutas
 
+    # Autenticación
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('accounts/logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'), 
+    path('logout-confirm/', auth_views.TemplateView.as_view(template_name='logout_confirm.html'), name='logout_confirm'),
 
     path('', RedirectView.as_view(url='login/', permanent=False)),
 ]

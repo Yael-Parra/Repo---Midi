@@ -118,8 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Configuración de autenticación
 LOGIN_URL = 'login'  # URL a la que redirigir si el usuario no está autenticado
-LOGIN_REDIRECT_URL = '/sesiones/'  # URL después del login exitoso (reemplaza con la app que quieras)
-LOGOUT_REDIRECT_URL = '/alumnos/'   # URL después del logout
+LOGIN_REDIRECT_URL = '/sesiones/'  # O cualquier otra página después del login
+LOGOUT_REDIRECT_URL = '/login/'  # URL después del logout
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
