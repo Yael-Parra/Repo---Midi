@@ -1,19 +1,52 @@
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Curso
+from .forms import CursoForm
+
 # app/cursos/views.py
+class CursoListView(LoginRequiredMixin, ListView):
+    model = Curso
+    template_name = 'curso_list.html'
+    context_object_name = 'cursos'
 
-from django.shortcuts import render
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        colegio_id = self.request.GET.get('colegio')
+        if colegio_id:
+            queryset = queryset.filter(id_colegio=colegio_id)
+        return queryset
 
-def lista_cursos(request):
-    # Lógica para listar cursos
-    return render(request, 'cursos/lista.html')  # Asegúrate de que la plantilla exista
+class CursoCreateView(LoginRequiredMixin, CreateView):
+    model = Curso
+    form_class = CursoForm
+    template_name = 'curso_form.html'
+    success_url = reverse_lazy('curso_list')
 
-def detalle_curso(request, id):
-    # Lógica para obtener el detalle de un curso específico
-    return render(request, 'cursos/detalle.html', {'id': id})  # Asegúrate de que la plantilla exista
+    def form_valid(self, form):
+        messages.success(self.request, 'Curso creado exitosamente')
+        return super().form_valid(form)
 
-def crear_curso(request):
-    # Lógica para crear un nuevo curso
-    return render(request, 'cursos/crear.html')  # Asegúrate de que la plantilla exista
+class CursoUpdateView(LoginRequiredMixin, UpdateView):
+    model = Curso
+    form_class = CursoForm
+    template_name = 'curso_form.html'
+    success_url = reverse_lazy('curso_list')
+    pk_url_kwarg = 'curso_id'
 
-def editar_curso(request, id):
-    # Lógica para editar un curso existente
-    return render(request, 'cursos/editar.html', {'id': id})  # Asegúrate de que la plantilla exista
+    def form_valid(self, form):
+        messages.success(self.request, 'Curso actualizado exitosamente')
+        return super().form_valid(form)
+
+class CursoDeleteView(LoginRequiredMixin, DeleteView):
+    model = Curso
+    template_name = 'curso_confirm_delete.html'
+    success_url = reverse_lazy('curso_list')
+    pk_url_kwarg = 'curso_id'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Curso eliminado exitosamente')
+        return super().delete(request, *args, **kwargs)

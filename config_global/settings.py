@@ -141,6 +141,7 @@ import os
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    "C:/Users/User/MIDI_Project/Repo---Midi/static",
 ]
 
 # Default primary key field type
