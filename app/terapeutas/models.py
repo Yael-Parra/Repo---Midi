@@ -1,6 +1,5 @@
 from django.db import models
 
-# Modelo Terapeuta
 class Terapeuta(models.Model):
     id_terapeuta = models.AutoField(primary_key=True, db_column="id_terapeuta")
     terapeuta_nombre = models.CharField(max_length=50, verbose_name="Nombre del Terapeuta", db_column="terapeuta_nombre")
@@ -11,5 +10,6 @@ class Terapeuta(models.Model):
 
     def __str__(self):
         return f"{self.terapeuta_nombre} {self.terapeuta_apellidos}"
+    
     class Meta:
         db_table = 'terapeutas'
