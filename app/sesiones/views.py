@@ -1,84 +1,94 @@
-# app/inscripciones/views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Sesion
+from .forms import SesionForm
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from .models import Sesion, Alumno, Terapeuta, Curso
+class SesionListView(LoginRequiredMixin, ListView):
+    model = Sesion
+    template_name = 'sesion_list.html'
+    context_object_name = 'sesiones'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter by search
+        search_query = self.request.GET.get('search', '')
+        if search_query:
+            # Search in relations using double underscore to access related fields
+            queryset = queryset.filter(
+                id_alumno__alumno_nombre__icontains=search_query
+            ) | queryset.filter(
+                id_terapeuta__terapeuta_nombre__icontains=search_query
+            ) | queryset.filter(
+                id_curso__nombre_curso__icontains=search_query
+            )
+        return queryset
+class SesionCreateView(LoginRequiredMixin, CreateView):
+    model = Sesion
+    form_class = SesionForm
+    template_name = 'sesion_form.html'
+    success_url = reverse_lazy('sesion_list')
+    
+    def form_valid(self, form):
+        # Log for debugging
+        print("Formulario válido, datos:", form.cleaned_data)
+        messages.success(self.request, "Sesión creada exitosamente.")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        # Detailed error log
+        print("Errores en el formulario:", form.errors)
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"Error en {field}: {error}")
+        return super().form_invalid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Añadir Sesión'
+        context['boton'] = 'Crear'
+        return context
 
-# Vista para listar todas las sesiones
-def lista_sesiones(request):
-    sesiones = Sesion.objects.all()  # Obtener todas las sesiones
-    return render(request, 'inscripciones/lista_sesiones.html', {'sesiones': sesiones})
+class SesionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Sesion
+    form_class = SesionForm
+    template_name = 'sesion_form.html'
+    
+    def get_object(self):
+        return get_object_or_404(Sesion, pk=self.kwargs['pk'])
+    
+    def get_success_url(self):
+        return reverse('sesion_detail', kwargs={'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        messages.success(self.request, "Sesión actualizada exitosamente.")
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar Sesión'
+        context['boton'] = 'Guardar Cambios'
+        return context
 
-# Vista para obtener el detalle de una sesión específica
-def detalle_sesion(request, id):
-    sesion = get_object_or_404(Sesion, id_sesion=id)  # Buscar la sesión por ID
-    return render(request, 'inscripciones/detalle_sesion.html', {'sesion': sesion})
+class SesionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Sesion
+    template_name = 'sesion_confirm_delete.html'
+    success_url = reverse_lazy('sesion_list')
+    
+    def get_object(self):
+        return get_object_or_404(Sesion, pk=self.kwargs['pk'])
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "Sesión eliminada exitosamente.")
+        return super().delete(request, *args, **kwargs)
 
-# Vista para crear una nueva sesión
-def crear_sesion(request):
-    if request.method == 'POST':
-        id_alumno = request.POST.get('id_alumno')
-        id_curso = request.POST.get('id_curso')
-        id_terapeuta = request.POST.get('id_terapeuta')
-        fecha_sesion = request.POST.get('fecha_sesion')
-        asistencia = request.POST.get('asistencia') == 'on'  # Si el checkbox está marcado
-        observaciones = request.POST.get('observaciones')
-
-        # Crear y guardar la nueva sesión
-        sesion = Sesion(
-            id_alumno=Alumno.objects.get(id_alumno=id_alumno),
-            id_curso=Curso.objects.get(id_curso=id_curso),
-            id_terapeuta=Terapeuta.objects.get(id_terapeuta=id_terapeuta),
-            fecha_sesion=fecha_sesion,
-            asistencia=asistencia,
-            observaciones=observaciones
-        )
-        sesion.save()
-
-        return redirect('lista_sesiones')  # Redirigir al listado de sesiones
-    else:
-        alumnos = Alumno.objects.all()  # Obtener todos los alumnos
-        cursos = Curso.objects.all()  # Obtener todos los cursos
-        terapeutas = Terapeuta.objects.all()  # Obtener todos los terapeutas
-        return render(request, 'inscripciones/crear_sesion.html', {
-            'alumnos': alumnos,
-            'cursos': cursos,
-            'terapeutas': terapeutas,
-        })
-
-# Vista para editar una sesión existente
-def editar_sesion(request, id):
-    sesion = get_object_or_404(Sesion, id_sesion=id)  # Buscar la sesión por ID
-
-    if request.method == 'POST':
-        # Actualizar los campos de la sesión
-        sesion.id_alumno = Alumno.objects.get(id_alumno=request.POST.get('id_alumno'))
-        sesion.id_curso = Curso.objects.get(id_curso=request.POST.get('id_curso'))
-        sesion.id_terapeuta = Terapeuta.objects.get(id_terapeuta=request.POST.get('id_terapeuta'))
-        sesion.fecha_sesion = request.POST.get('fecha_sesion')
-        sesion.asistencia = request.POST.get('asistencia') == 'on'  # Si el checkbox está marcado
-        sesion.observaciones = request.POST.get('observaciones')
-
-        sesion.save()  # Guardar los cambios en la sesión
-
-        return redirect('detalle_sesion', id=id)  # Redirigir al detalle de la sesión editada
-
-    else:
-        alumnos = Alumno.objects.all()
-        cursos = Curso.objects.all()
-        terapeutas = Terapeuta.objects.all()
-
-        return render(request, 'inscripciones/editar_sesion.html', {
-            'sesion': sesion,
-            'alumnos': alumnos,
-            'cursos': cursos,
-            'terapeutas': terapeutas,
-        })
-
-# Vista para eliminar una sesión
-def eliminar_sesion(request, id):
-    sesion = get_object_or_404(Sesion, id_sesion=id)  # Buscar la sesión por ID
-    if request.method == 'POST':
-        sesion.delete()  # Eliminar la sesión
-        return redirect('lista_sesiones')  # Redirigir al listado de sesiones
-    return render(request, 'inscripciones/eliminar_sesion.html', {'sesion': sesion})
+class SesionDetailView(LoginRequiredMixin, DetailView):
+    model = Sesion
+    template_name = 'sesion_detail.html'
+    context_object_name = 'sesion'
+    
+    def get_object(self):
+        return get_object_or_404(Sesion, pk=self.kwargs['pk'])

@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Listado de Sesiones{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Sesiones</h1>
+        <a href="{% url 'sesion_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Añadir Sesión
+        </a>
+    </div>
+
+   <!-- Alert messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}danger{% else %}info{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+   <!-- Search -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" placeholder="Buscar por alumno, curso o terapeuta" value="{{ request.GET.search }}">
+                <button type="submit" class="btn btn-outline-primary">Buscar</button>
+                {% if request.GET.search %}
+                    <a href="{% url 'sesion_list' %}" class="btn btn-outline-secondary ms-2">Limpiar</a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <!-- Session table -->
+    {% if sesiones %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Alumno</th>
+                        <th>Curso</th>
+                        <th>Terapeuta</th>
+                        <th>Fecha y Hora</th>
+                        <th>Asistencia</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sesion in sesiones %}
+                        <tr>
+                            <td>{{ sesion.id_alumno.alumno_nombre }}</td>
+                            <td>{{ sesion.id_curso.nombre_curso }}</td>
+                            <td>{{ sesion.id_terapeuta.terapeuta_nombre }}</td>
+                            <td>{{ sesion.fecha_sesion|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                {% if sesion.asistencia %}
+                                    <span class="badge bg-success">Sí</span>
+                                {% else %}
+                                    <span class="badge bg-danger">No</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'sesion_detail' sesion.pk %}" class="btn btn-sm btn-info" title="Ver detalle">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{% url 'sesion_update' sesion.pk %}" class="btn btn-sm btn-warning" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'sesion_delete' sesion.pk %}" class="btn btn-sm btn-danger" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+            <nav aria-label="Navegación de páginas">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">&laquo; Primera</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Anterior</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">&laquo; Primera</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Anterior</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <span class="page-link">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                        </span>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Siguiente</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Última &raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Última &raquo;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-info">
+            No se encontraron sesiones{% if request.GET.search %} para la búsqueda "{{ request.GET.search }}"{% endif %}.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extrajs %}
+<script src="{% static 'sesiones/js/sesiones.js' %}"></script>
+{% endblock %}

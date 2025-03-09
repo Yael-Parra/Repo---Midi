@@ -14,17 +14,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
-from django.urls import include
+from django.urls import path, include
+from django.views.generic.base import RedirectView
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # Incluye las URLs de las aplicaciones
-    path('alumnos/', include('app.alumnos.urls')),  # Asegúrate de que exista un archivo urls.py en app/alumnos
-    path('cursos/', include('app.cursos.urls')),    # Asegúrate de que exista un archivo urls.py en app/cursos
-    path('colegios/', include('app.colegios.urls')), # Asegúrate de que exista un archivo urls.py en app/colegios
-    path('inscripciones/', include('app.inscripciones.urls')), # Asegúrate de que exista un archivo urls.py en app/inscripciones
-    path('info_padres_tutores_legales/', include('app.info_padres_tutores_legales.urls')), # Asegúrate de que exista un archivo urls.py en app/info_padres_tutores_legales
-    path('terapeutas/', include('app.terapeutas.urls')), # Asegúrate de que exista un archivo urls.py en app/terapeutas
+    path('alumnos/', include('app.alumnos.urls')),  # Incluye las URLs de la aplicación alumnos
+    path('cursos/', include('app.cursos.urls')),  # Incluye las URLs de la aplicación cursos
+    path('colegios/', include('app.colegios.urls')),  # Incluye las URLs de la aplicación colegios
+    path('inscripciones/', include('app.inscripciones.urls')),  # Incluye las URLs de la aplicación inscripciones
+    path('info_padres_tutores_legales/', include('app.info_padres_tutores_legales.urls')),
+    path('sesiones/', include('app.sesiones.urls')),  # Incluye las URLs de la aplicación info_padres_tutores_legales
+    path('terapeutas/', include('app.terapeutas.urls')),  # Incluye las URLs de la aplicación terapeutas
+
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('accounts/logout/', LogoutView.as_view(next_page='login'), name='logout'),
+
+    path('', RedirectView.as_view(url='login/', permanent=False)),
 ]
+

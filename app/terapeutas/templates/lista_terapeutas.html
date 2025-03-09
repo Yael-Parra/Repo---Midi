@@ -1,0 +1,9 @@
+
+
+
+<h1>Lista de Terapeutas</h1>
+<ul>
+    {% for terapeuta in terapeutas %}
+    <li>{{ terapeuta.terapeuta_nombre }} {{ terapeuta.terapeuta_apellidos }}</li>
+    {% endfor %}
+</ul>

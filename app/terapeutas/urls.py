@@ -9,4 +9,5 @@ urlpatterns = [
     path('crear/', views.crear_terapeuta, name='crear_terapeuta'),  # Vista para crear un nuevo terapeuta
     path('editar/<int:id>/', views.editar_terapeuta, name='editar_terapeuta'),  # Vista para editar un terapeuta existente
     path('eliminar/<int:id>/', views.eliminar_terapeuta, name='eliminar_terapeuta'),  # Vista para eliminar un terapeuta
+
 ]

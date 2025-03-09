@@ -1,11 +1,11 @@
 # app/alumnos/urls.py
-
 from django.urls import path
-from . import views  # Asegúrate de que tus vistas estén importadas
+from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),  # Vista principal de alumnos
-    path('detalle/<int:id>/', views.detalle, name='detalle'),  # Vista de detalle de un alumno
-    path('crear/', views.crear_alumno, name='crear_alumno'),  # Vista para crear un nuevo alumno
-    path('editar/<int:id>/', views.editar_alumno, name='editar_alumno'),  # Vista para editar un alumno
+    path('', views.home, name='home'),
+    path('registrarAlumno/', views.registrarAlumno, name='registrar_alumno'),
+    path('edicionAlumno/<int:id_alumno>/', views.edicionAlumno, name='edicion_alumno'),
+    path('editarAlumno/', views.editarAlumno, name='editar_alumno'),
+    path('eliminarAlumno/<int:id_alumno>/', views.eliminarAlumno, name='eliminar_alumno'),
 ]

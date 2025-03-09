@@ -3,6 +3,11 @@
 from django.shortcuts import render, redirect
 from .models import Terapeuta  # Asegúrate de que el modelo esté importado
 
+
+def lista_terapeutas(request):
+    terapeutas = Terapeuta.objects.all()
+    return render(request, 'terapeutas/lista_terapeutas.html', {'terapeutas': terapeutas}) # Asegúrate de que la plantilla exista
+
 def lista_terapeutas(request):
     # Lógica para listar terapeutas
     return render(request, 'terapeutas/lista.html')  # Asegúrate de que la plantilla exista

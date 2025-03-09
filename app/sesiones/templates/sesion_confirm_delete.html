@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Sesión{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="mb-0">Confirmar Eliminación</h3>
+                </div>
+                <div class="card-body">
+                    <p class="lead">¿Estás seguro de que deseas eliminar esta sesión?</p>
+                    
+                    <div class="alert alert-warning">
+                        <p><strong>Datos de la sesión:</strong></p>
+                        <ul>
+                            <li><strong>Alumno:</strong> {{ object.id_alumno.alumno_nombre }}</li>
+                            <li><strong>Curso:</strong> {{ object.id_curso.nombre_curso }}</li>
+                            <li><strong>Terapeuta:</strong> {{ object.id_terapeuta.terapeuta_nombre }}</li>
+                            <li><strong>Fecha y Hora:</strong> {{ object.fecha_sesion|date:"d/m/Y H:i" }}</li>
+                        </ul>
+                    </div>
+                    
+                    <p class="text-danger">Esta acción no se puede deshacer.</p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{% url 'sesion_list' %}" class="btn btn-secondary me-md-2">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

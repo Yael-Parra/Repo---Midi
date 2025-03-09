@@ -1,6 +1,6 @@
 from django.db import models
 
-# Modelo Alumno
+# Models Alumno
 class Alumno(models.Model):
     id_alumno = models.AutoField(primary_key=True, db_column='id_alumno')
     alumno_nombre = models.CharField(max_length=50, verbose_name="Nombre del Alumno", db_column='alumno_nombre')
