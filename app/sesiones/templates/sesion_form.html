@@ -94,21 +94,21 @@
                                     </div>
                                 {% endif %}
                             </div>          
-                        <!-- Notas -->
+                        <!-- observaciones -->
                         <div class="mb-3">
-                            <label for="{{ form.notas.id_for_label }}">
-                                Notas
+                            <label for="{{ form.observaciones.id_for_label }}">
+                                observación
                             </label>
-                            <textarea name="{{ form.notas.name }}" id="{{ form.notas.id_for_label }}" class="form-control {% if form.notas.errors %}is-invalid{% endif %}" rows="4">{{ form.notas.value|default:'' }}</textarea>
-                            {% if form.notas.errors %}
+                            <textarea name="{{ form.observaciones.name }}" id="{{ form.observaciones.id_for_label }}" class="form-control {% if form.notas.errors %}is-invalid{% endif %}" rows="4">{{ form.notas.value|default:'' }}</textarea>
+                            {% if form.observaciones.errors %}
                                 <div class="invalid-feedback">
-                                    {% for error in form.notas.errors %}
+                                    {% for error in form.observaciones.errors %}
                                         {{ error }}
                                     {% endfor %}
                                 </div>
                             {% endif %}
-                            {% if form.notas.help_text %}
-                                <small class="form-text text-muted">{{ form.notas.help_text }}</small>
+                            {% if form.observaciones.help_text %}
+                                <small class="form-text text-muted">{{ form.observaciones.help_text }}</small>
                             {% endif %}
                         </div>
 
