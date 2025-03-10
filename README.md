@@ -7,7 +7,6 @@
 - [🔧 Possible Improvements](#-possible-improvements)
 - [👨‍💻 Technologies Used](#-technologies-used)
 - [⚙ Installation & Usage](#-installation--usage)
-- [💖 API Documentation](#-api-documentation)
 - [🌟 Project Status](#-project-status)
 - [🧑‍💻 Collaborators](#-collaborators)
 
@@ -170,12 +169,6 @@ cd ..
 python manage.py runserver
 ```
 Access the API at: `http://127.0.0.1:8000/`
-
----
-
-## 💖 API Documentation
-The API documentation is available in **Postman**. You can import the collection from:  
-🔗 [Postman Documentation Link](#) *(Link will be added here)*
 
 ---
 
