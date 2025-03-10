@@ -25,7 +25,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="/sesiones/">
                 <img src="{% static 'img/logo.png' %}" alt="Logo" width="150">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
@@ -91,10 +91,6 @@
                                 <i class="fas fa-user-circle"></i> {{ user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="/profile/">
-                                    <i class="fas fa-id-card"></i> Mi perfil
-                                </a></li>
-                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{% url 'logout_confirm' %}">
                                     <i class="fas fa-sign-out-alt"></i> Cerrar sesión
                                 </a></li>
