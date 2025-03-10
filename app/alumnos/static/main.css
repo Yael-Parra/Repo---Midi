@@ -1,0 +1,7 @@
+.navbar-custom {
+    background-color: #141413 !important;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Detalles del Alumno</h1>
+    
+    <div class="card">
+        <div class="card-header">
+            {{ alumno.alumno_nombre }} {{ alumno.alumno_apellidos }}
+        </div>
+        <div class="card-body">
+            <p><strong>ID:</strong> {{ alumno.id_alumno }}</p>
+            <p><strong>Nombre:</strong> {{ alumno.alumno_nombre }}</p>
+            <p><strong>Apellidos:</strong> {{ alumno.alumno_apellidos }}</p>
+            <p><strong>Fecha de Nacimiento:</strong> {{ alumno.alumno_fecha_nacimiento|date:"d/m/Y" }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'alumno_update' alumno.id_alumno %}" class="btn btn-warning">Editar</a>
+            <a href="{% url 'alumno_delete' alumno.id_alumno %}" class="btn btn-danger">Eliminar</a>
+            <a href="{% url 'alumno_list' %}" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

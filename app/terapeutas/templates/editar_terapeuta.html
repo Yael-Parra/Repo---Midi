@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-warning text-dark">
+            <h3 class="mb-0">Editar Terapeuta</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.terapeuta_nombre.id_for_label }}">Nombre:</label>
+                        {{ form.terapeuta_nombre }}
+                        {% if form.terapeuta_nombre.errors %}
+                        <small class="text-danger">{{ form.terapeuta_nombre.errors }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.terapeuta_apellidos.id_for_label }}">Apellidos:</label>
+                        {{ form.terapeuta_apellidos }}
+                        {% if form.terapeuta_apellidos.errors %}
+                        <small class="text-danger">{{ form.terapeuta_apellidos.errors }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.terapeuta_cedula.id_for_label }}">Cédula:</label>
+                        {{ form.terapeuta_cedula }}
+                        {% if form.terapeuta_cedula.errors %}
+                        <small class="text-danger">{{ form.terapeuta_cedula.errors }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.terapeuta_telefono.id_for_label }}">Teléfono:</label>
+                        {{ form.terapeuta_telefono }}
+                        {% if form.terapeuta_telefono.errors %}
+                        <small class="text-danger">{{ form.terapeuta_telefono.errors }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="{{ form.terapeuta_email.id_for_label }}">Email:</label>
+                    {{ form.terapeuta_email }}
+                    {% if form.terapeuta_email.errors %}
+                    <small class="text-danger">{{ form.terapeuta_email.errors }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+                    <a href="{% url 'lista_terapeutas' %}" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

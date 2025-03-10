@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">Eliminar Terapeuta</h3>
+        </div>
+        <div class="card-body">
+            <p class="lead">¿Está seguro que desea eliminar al terapeuta <strong>{{ terapeuta.terapeuta_nombre }} {{ terapeuta.terapeuta_apellidos }}</strong>?</p>
+            <p class="text-danger">Esta acción no se puede deshacer.</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Sí, Eliminar
+                    </button>
+                    <a href="{% url 'lista_terapeutas' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h3 class="text-center">Cerrar Sesión</h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-center">¿Estás seguro de que deseas cerrar sesión?</p>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger">Sí, cerrar sesión</button>
+                            <a href="{% url 'alumno_list' %}" class="btn btn-secondary">No, volver</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

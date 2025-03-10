@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Detalles del Terapeuta</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Información Personal</h5>
+                    <hr>
+                    <p><strong>Nombre:</strong> {{ terapeuta.terapeuta_nombre }}</p>
+                    <p><strong>Apellidos:</strong> {{ terapeuta.terapeuta_apellidos }}</p>
+                    <p><strong>Cédula:</strong> {{ terapeuta.terapeuta_cedula }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Información de Contacto</h5>
+                    <hr>
+                    <p><strong>Teléfono:</strong> {{ terapeuta.terapeuta_telefono }}</p>
+                    <p><strong>Email:</strong> {{ terapeuta.terapeuta_email }}</p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a href="{% url 'lista_terapeutas' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+                <a href="{% url 'editar_terapeuta' terapeuta.id_terapeuta %}" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <a href="{% url 'eliminar_terapeuta' terapeuta.id_terapeuta %}" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Eliminar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
