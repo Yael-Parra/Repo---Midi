@@ -102,10 +102,10 @@ This retrospective aims to reflect on the progress of the project, analyze the c
 ---
 
 ## 📝 Contributors
-- **Yael Parra** - Database Architect / Data Engineer / Backend Developer
+- **Yael Parra** - Database Architect / Backend Developer
 - **Andreina Suescum** - Frontend Developer / Client Liaison
-- **Maxi Scarlato** - Founding Developer / Backend Developer / Developer Advocate
-- **Jorge** - [Role/Position Not Specified]
+- **Maxi Scarlato** - Founding Developer / Backend Developer 
+- **Jorge Mateos** - Test Implementation
 
 Feel free to reach out to the contributors for further questions or collaboration opportunities.
 
