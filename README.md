@@ -66,7 +66,7 @@ An **Excel file** has been provided to the client for easy data management. A sc
 ✅ Implement an accounting module for managing expenses (awaiting client requirements).  
 ✅ Improve unit testing coverage for better reliability.  
 ✅ Optimize API performance for handling a larger dataset.  
-✅ Deploy the API to the cloud for better scalability and availability.  
+✅ Continue developing more views.  
 ✅ Implement CSV data exports for easier client reporting.  
 
 ---
