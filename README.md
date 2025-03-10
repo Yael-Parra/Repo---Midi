@@ -188,7 +188,7 @@ If you find this project useful, please ⭐ **star the repository** ⭐ on GitHu
 ---
 
 ## 🧑‍💻 Colaborators
-If you liked this project feel free to follow us:
+If you liked this project feel free to contact us:
 
 - [Yael Parra](https://www.linkedin.com/in/yael-parra/) - Database Architect / Data Engineer / Backend Developer / Project Documenter
 - [Andreina Suescum](https://www.linkedin.com/in/andreina-suescum-a44860231) - Frontend Developer / Client Liaison
