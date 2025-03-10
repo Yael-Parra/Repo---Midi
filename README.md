@@ -91,6 +91,29 @@ git clone https://github.com/Yael-Parra/Repo---Midi.git
 # Be sure you are on the repository's folder
 cd Repo---Midi
 ```
+### 📂 Folder's Structure
+````markdown
+apps/
+├── alumnos/
+├── colegios/
+├── cursos/
+├── info_padres_tutores_legales/
+├── inscripciones/
+├── terapias/
+└── sesiones/
+
+bbdd/
+├── creation_db.py
+├── midi_datos/
+└── preparacion_e_insercion_datos.py
+
+config_global/
+└── settings/
+
+templates/
+main.py
+manage.py
+````
 
 ### 📦 Install Dependencies
 Create and activate a virtual environment:
@@ -133,7 +156,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 📂 Load Old Client Data (Optional)
+### 📊 Load Old Client Data (Optional)
 For confidentiality reasons, the data shared is not real.
 ```sh
 # Place yourself first on the folder were the database Scripts and excel are. 
