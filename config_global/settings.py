@@ -137,12 +137,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    "C:/Users/User/MIDI_Project/Repo---Midi/static",
+    os.getenv("dir_static"),  # Utiliza la variable desde el .env
 ]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
