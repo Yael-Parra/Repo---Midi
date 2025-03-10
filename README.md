@@ -107,11 +107,14 @@ bbdd/
 └── preparacion_e_insercion_datos.py
 
 config_global/
-└── settings/
+├── settings/
+└── ...
 
+static/
 templates/
 main.py
 manage.py
+...
 ````
 
 ### 📦 Install Dependencies
@@ -183,9 +186,9 @@ If you find this project useful, please ⭐ **star the repository** ⭐ on GitHu
 ## 🧑‍💻 Colaborators
 If you liked this project feel free to contact us:
 
-- [Yael Parra](https://www.linkedin.com/in/yael-parra/) - Database Architect / Data Engineer / Backend Developer / Project Documenter
+- [Yael Parra](https://www.linkedin.com/in/yael-parra/) - Database Architect / Backend Developer 
 - [Andreina Suescum](https://www.linkedin.com/in/andreina-suescum-a44860231) - Frontend Developer / Client Liaison
-- [Maxi Scarlato](https://www.linkedin.com/in/maximiliano-carlos-scarlato-830a94284/) - Founding Developer /Backend Developer / Developer Advocate
-- [Jorge](https://github.com/michaeljohnson) - 
+- [Maxi Scarlato](https://www.linkedin.com/in/maximiliano-carlos-scarlato-830a94284/) - Founding Developer /Backend Developer 
+- [Jorge](https://www.linkedin.com/in/jorge-luis-mateos-reyes/) - Test implementation
 
 
