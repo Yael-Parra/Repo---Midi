@@ -71,7 +71,7 @@ An **Excel file** has been provided to the client for easy data management. A sc
 ---
 
 ## 👨‍💻 Technologies Used
-- **Backend:** Django (Python)
+- **Backend:** Django (Python), CSS, Html
 - **Database:** MySQL
 - **API Documentation:** Postman
 - **Version Control:** GitHub
@@ -183,7 +183,7 @@ If you find this project useful, please ⭐ **star the repository** ⭐ on GitHu
 
 ---
 
-## 🧑‍💻 Colaborators
+## 🧑‍💻 Collaborators
 If you liked this project feel free to contact us:
 
 - [Yael Parra](https://www.linkedin.com/in/yael-parra/) - Database Architect / Backend Developer 
