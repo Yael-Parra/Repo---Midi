@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'app.cursos',
     'app.inscripciones',
     'app.sesiones',
+    'rest_framework',
     
 ]
 
@@ -83,6 +84,7 @@ WSGI_APPLICATION = 'config_global.wsgi.application'
 
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
 DATABASES = {
@@ -92,8 +94,7 @@ DATABASES = {
         'USER': os.getenv('mysql_username'),  # Usuario de MySQL Workbench
         'PASSWORD': os.getenv('mysql_password'),  # Contraseña de MySQL
         'HOST': os.getenv('mysql_host'),  # Dirección local de MySQL
-        'PORT': os.getenv('mysql_port'),  # Puerto predeterminado de MySQL
-        
+        'PORT': int(os.getenv('mysql_port')),  # Convertir el puerto a entero
     }
 }
 
@@ -141,11 +142,18 @@ import os
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    "C:/Users/User/MIDI_Project/Repo---Midi/static",
+    "C:\\Users\\admin\\Desktop\\Repo---Midi\\static",
 ]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # Permite acceso a la API sin autenticación
+    ],
+}
